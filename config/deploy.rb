@@ -5,9 +5,8 @@ set :repo_url, 'git@github.com:danphilibin/tunescraper.git'
 set :branch, "master"
 set :deploy_to, '/var/www/app'
 
-set :user, "dan"
-
 set :ssh_options, {
+  user: "dan",
   forward_agent: true,
   port: 22
 }
