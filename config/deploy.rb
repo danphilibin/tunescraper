@@ -25,8 +25,7 @@ set :pty, true
 
 set :keep_releases, 5
 
-server "104.131.207.74", :app, :web, :db, :primary => true
-
+server "104.131.207.74", roles: [:app, :web, :db], :primary => true
 
 namespace :deploy do
 
