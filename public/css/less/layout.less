@@ -1,0 +1,49 @@
+body {
+  background:#fff;
+  font-family:'Avenir Next', 'Avenir', 'Helvetica', 'Arial', sans-serif;
+  font-size:16px;
+  line-height:20px;
+  color:#333;
+}
+
+
+#site-header {
+  background:#388BF6;
+  height:60px;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:90;
+
+  h1 {
+    text-align:center;
+    font-weight:600;
+    font-size:24px;
+    line-height:24px;
+    padding-top:18px;
+
+    a {
+      text-decoration:none;
+      color:#fff;
+    }
+  }
+
+  @media screen and (min-width:@screen-sm) {
+    height:72px;
+
+    h1 {
+      font-size:30px;
+      line-height:30px;
+      padding-top:21px;
+    }
+  }
+}
+
+.page-container {
+  padding-top:60px;
+
+  @media screen and (min-width:@screen-sm) {
+    padding-top:72px;
+  }
+}

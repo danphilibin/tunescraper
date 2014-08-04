@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  post 'scrape' => 'scraper#scrape', as: 'scrape'
+  get 'vault' => 'pages#vault', as: :vault
+
+  resources :track
 
 end

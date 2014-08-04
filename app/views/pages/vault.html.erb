@@ -1,0 +1,51 @@
+<div class="container page-container">
+
+  <% @tracks.each do |t| %>
+  <div class="row vault-track" <%="data-soundcloud-id=#{t.soundcloud_id}" if t.soundcloud_id %>>
+    <div class="col-lg-6 col-md-6">
+      <h3><a href="<%=t.source%>"><%=t.name%></a></h3>
+
+      <%
+      #<div plangular data-src="https://soundcloud.com/edmtunestv/gold-skies-elephante-remix">
+      #  <a href="" ng-click="player.play(track)" ng-hide="player.playing == track">
+      #    <!-- <div plangular-icon="play"></div> -->
+      #    PLAY
+      #  </a>
+      #  <a href="" ng-click="player.pause()" ng-show="player.playing == track">
+      #    <!-- <div plangular-icon="pause"></div> -->
+      #    PAUSE
+      #  </a>
+      #  <h1>{{ track.user.username }} - {{ track.title }}</h1>
+      #</div>
+      %>
+
+      <div class="player-wrapper">
+
+        <% if t.soundcloud_id %>
+
+        <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%=t.soundcloud_id%>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true" width="100%" height="120" frameborder="no" scrolling="no"></iframe>
+
+        <% elsif t.audio_url %>
+
+        <audio controls>
+          <source src="<%=t.audio_url%>" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+
+        <% end %>
+
+      </div>
+
+      <p class="actions">
+        <% if t.soundcloud_id %>
+        <a href="soundcloud:tracks:<%=t.soundcloud_id%>">Open in SoundCloud app</a> |
+        <% end %>
+
+        <a href="<%=track_path(t.id)%>" data-method="delete" class="delete">Delete</a>
+      </p>
+
+    </div>
+  </div>
+  <% end %>
+
+</div>
