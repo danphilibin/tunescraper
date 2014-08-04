@@ -27,4 +27,4 @@ gem 'nokogiri'
 
 gem 'soundcloud'
 
-gem 'capistrano', group: :development
+gem 'capistrano-rails', group: :development
