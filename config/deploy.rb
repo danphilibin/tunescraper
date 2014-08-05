@@ -1,4 +1,6 @@
 # config valid only for Capistrano 3.1
+require "bundler/capistrano"
+
 lock '3.2.1'
 
 set :application, 'tunescraper'
@@ -12,7 +14,7 @@ set :pty, true
 set :format, :pretty
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml}
+# set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -43,12 +45,13 @@ namespace :deploy do
       # end
     end
   end
-end
 
-namespace :db do
-  task :db_config, :except => { :no_release => true }, :role => :app do
-    run "cp -f ~/config/database.yml #{release_path}/config/database.yml"
+  task :copy_database_config do
+    on roles(:app) do
+      execute "cp ~/config/database.yml #{release_path}/config/database.yml"
+      execute "mkdir #{release_path}/tmp"
+    end
   end
 end
 
-after "deploy:finalize_update", "db:db_config"
+after 'deploy:updated', 'deploy:copy_database_config'
