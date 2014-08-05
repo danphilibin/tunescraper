@@ -1,6 +1,4 @@
 # config valid only for Capistrano 3.1
-require "bundler/capistrano"
-
 lock '3.2.1'
 
 set :application, 'tunescraper'
@@ -46,12 +44,37 @@ namespace :deploy do
     end
   end
 
+  desc "Migrate DB"
+  task :migrate_db do
+    on roles(:app) do
+      execute "cd #{current_path} && bundle exec rake db:migrate RAILS_ENV=production"
+      execute "touch #{current_path}/tmp/restart.txt"
+    end
+  end
+
+  desc "Bundle gems"
+  task :bundle_install do
+    on roles(:app) do
+      execute "cd #{current_path} && bundle install"
+      execute "touch #{current_path}/tmp/restart.txt"
+    end
+  end
+
+  desc "Update gems"
+  task :bundle_update do
+    on roles(:app) do
+      execute "cd #{current_path} && bundle update"
+      execute "touch #{current_path}/tmp/restart.txt"
+    end
+  end
+
   task :copy_database_config do
     on roles(:app) do
       execute "cp ~/config/database.yml #{release_path}/config/database.yml"
+      execute "cp ~/config/secrets.yml #{release_path}/config/secrets.yml"
       execute "mkdir #{release_path}/tmp"
     end
   end
 end
 
-after 'deploy:updated', 'deploy:copy_database_config'
+after 'deploy:updated', 'deploy:copy_database_config', 'deploy:bundle_install', 'deploy:bundle_update'
