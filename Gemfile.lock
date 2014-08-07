@@ -49,6 +49,9 @@ GEM
     colorize (0.7.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     hashie (2.1.2)
     hike (1.2.3)
     httmultiparty (0.3.15)
@@ -149,6 +152,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano-rails
   coffee-rails (~> 4.0.0)
+  figaro
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri

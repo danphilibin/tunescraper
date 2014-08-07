@@ -70,9 +70,8 @@ namespace :deploy do
 
   task :copy_database_config do
     on roles(:app) do
-      execute "cp ~/config/database.yml #{release_path}/config/database.yml"
-      execute "cp ~/config/secrets.yml #{release_path}/config/secrets.yml"
-      execute "mkdir #{release_path}/tmp"
+      # execute "cp ~/config/secrets.yml #{release_path}/config/secrets.yml"
+      # execute "mkdir #{release_path}/tmp"
     end
   end
 end

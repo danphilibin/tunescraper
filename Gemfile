@@ -23,8 +23,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
+# Use Nokogiri for scraping sites
 gem 'nokogiri'
 
+# SoundCloud Ruby library
 gem 'soundcloud'
 
+# Use Capistrano for local deployments
 gem 'capistrano-rails', group: :development
+
+# Use Figaro for easy, secure application configuration
+gem 'figaro'

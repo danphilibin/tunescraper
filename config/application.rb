@@ -20,9 +20,6 @@ module TuneScraper
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    ENV['SOUNDCLOUD_CLIENT_ID']     = 'fa5bf446b6b4c23df73d59e808f20dfb'
-    ENV['SOUNDCLOUD_CLIENT_SECRET'] = '428fbe0ef94988692945839ee6ec83c3'
-
     ENV['APP_NAME'] = 'ListenList'
   end
 end
