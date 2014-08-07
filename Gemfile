@@ -38,7 +38,7 @@ group :development do
 end
 
 group :production do
-  gem 'mysql'
+  gem 'mysql2'
 end
 
 # Use Figaro for easy, secure application configuration
