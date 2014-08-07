@@ -15,5 +15,10 @@ development:
 #   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql
+  timeout: 5000
+  encoding: utf8
+  database: <%= ENV['db_name'] %>
+  username: <%= ENV['db_user'] %>
+  password: <%= ENV['db_pass'] %>
+  host: localhost

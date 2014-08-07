@@ -30,7 +30,11 @@ gem 'nokogiri'
 gem 'soundcloud'
 
 # Use Capistrano for local deployments
-gem 'capistrano-rails', group: :development
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end
 
 # Use Figaro for easy, secure application configuration
 gem 'figaro'

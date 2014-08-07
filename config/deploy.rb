@@ -11,6 +11,8 @@ set :pty, true
 
 set :format, :pretty
 
+set :rvm_custom_path, "/home/dan/.rvm"
+
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
 
@@ -29,51 +31,33 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
+      execute :mkdir, '-p', "#{ release_path }/tmp"
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-  after :publishing, :restart
-
+  desc 'Clear application cache'
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
       # within release_path do
-      #   execute :rake, 'cache:clear'
+        # execute :rake, 'cache:clear'
       # end
     end
   end
 
-  desc "Migrate DB"
-  task :migrate_db do
+  desc 'Copy application environment vars'
+  task :copy_env_vars do
     on roles(:app) do
-      execute "cd #{current_path} && bundle exec rake db:migrate RAILS_ENV=production"
-      execute "touch #{current_path}/tmp/restart.txt"
+      execute "cp ~/config/application.yml #{release_path}/config/application.yml"
     end
   end
 
-  desc "Bundle gems"
-  task :bundle_install do
+  task :migrate do
     on roles(:app) do
-      execute "cd #{current_path} && bundle install"
-      execute "touch #{current_path}/tmp/restart.txt"
+      execute "cd #{release_path} && rake db:migrate"
     end
   end
 
-  desc "Update gems"
-  task :bundle_update do
-    on roles(:app) do
-      execute "cd #{current_path} && bundle update"
-      execute "touch #{current_path}/tmp/restart.txt"
-    end
-  end
-
-  task :copy_database_config do
-    on roles(:app) do
-      # execute "cp ~/config/secrets.yml #{release_path}/config/secrets.yml"
-      # execute "mkdir #{release_path}/tmp"
-    end
-  end
+  after :publishing, :restart
+  after :publishing, :copy_env_vars
 end
-
-after 'deploy:updated', 'deploy:copy_database_config', 'deploy:bundle_install', 'deploy:bundle_update'
