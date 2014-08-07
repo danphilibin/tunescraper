@@ -20,6 +20,6 @@ module TuneScraper
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    ENV['APP_NAME'] = 'ListenList'
+    ENV['APP_NAME'] = 'Listen Later'
   end
 end

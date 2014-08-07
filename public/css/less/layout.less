@@ -17,7 +17,7 @@ body {
   z-index:90;
 
   h1 {
-    text-align:center;
+    text-align:left;
     font-weight:600;
     font-size:24px;
     line-height:24px;
@@ -26,6 +26,28 @@ body {
     a {
       text-decoration:none;
       color:#fff;
+    }
+  }
+
+  .nav {
+
+    ul {
+      padding-top:26px;
+      text-align:right;
+    }
+
+    li {
+      display:inline-block;
+      vertical-align:top;
+      margin-left:12px;
+      &:first-child { margin-left:0; }
+    }
+
+    a {
+      color:#fff;
+      font-weight:500;
+      text-decoration:none;
+      &:hover { text-decoration:underline; }
     }
   }
 
@@ -45,5 +67,28 @@ body {
 
   @media screen and (min-width:@screen-sm) {
     padding-top:72px;
+  }
+}
+
+.vault-track {
+  margin-bottom:42px;
+
+  h3 a {
+    color:@body;
+    text-decoration:none;
+  }
+
+  .actions {
+    padding-top:12px;
+
+    a {
+      color:@body;
+      text-decoration:underline;
+      &:hover { text-decoration:none; }
+    }
+    .pipe {
+      color:#aaa;
+      margin:0 3px;
+    }
   }
 }
