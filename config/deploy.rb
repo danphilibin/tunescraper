@@ -13,16 +13,6 @@ set :format, :pretty
 
 set :rvm_custom_path, "/home/dan/.rvm"
 
-# Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
-
-# Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
 set :keep_releases, 5
 
 namespace :deploy do
@@ -54,10 +44,11 @@ namespace :deploy do
 
   task :migrate do
     on roles(:app) do
-      execute "cd #{release_path} && rake db:migrate"
+      execute "cd #{release_path} && bundle exec rake db:migrate RAILS_ENV=production"
     end
   end
 
   after :publishing, :restart
   after :publishing, :copy_env_vars
+  after :publishing, :migrate
 end
